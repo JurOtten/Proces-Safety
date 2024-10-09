@@ -1,8 +1,7 @@
 # Tic-tac-toe
 'Hier is de diagram gemaakt van Tic-tac-toe'
 
-```
-plantuml
+```plantuml
 
 @startuml
 actor Player1
