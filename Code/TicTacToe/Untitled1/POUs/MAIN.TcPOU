@@ -51,13 +51,17 @@ END_IF
 
 IF GVL.Rechthoek_1 THEN
     GVL.Rondje_1 := TRUE;
-END_IF]]></ST>
+END_IF
+
+//test ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="171" Count="40" />
       <LineId Id="215" Count="2" />
       <LineId Id="224" Count="0" />
       <LineId Id="2" Count="0" />
+      <LineId Id="229" Count="0" />
+      <LineId Id="228" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
