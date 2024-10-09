@@ -1,7 +1,8 @@
 # Tic-tac-toe
 'Hier is de diagram gemaakt van Tic-tac-toe'
 
-```plantuml
+```
+plantuml
 
 @startuml
 actor Player1
@@ -52,7 +53,7 @@ loop each turn
     Game -> Player2: nextTurn()
 end
 @enduml
-
+```
 
 
 

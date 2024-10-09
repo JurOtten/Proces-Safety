@@ -3,11 +3,4 @@ authors = ["JurOtten"]
 language = "en"
 multilingual = false
 src = "src"
-title = "Tictactoe"
-
-
-[preprocessor.plantuml]
-plantuml-cmd="http://localhost:8181"
-
-[output.html]
-default-theme = "Rust"
+title = "Proces & Safety"
