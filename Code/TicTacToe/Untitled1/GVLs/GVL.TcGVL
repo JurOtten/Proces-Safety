@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="GVL" Id="{7ae1cc82-6396-4c22-9d9f-9bdfeaa6bf26}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	
+	Test : BOOL;
+	
+	Begin_Knop: BOOL;
+	Reset_Knop: BOOL; 
+	
+	Player_1: BOOL;
+	Player_1_Lamp: BOOL;
+	Player_2: BOOL;
+	Player_2_Lamp: BOOL;
+	
+	
+    playerSelected : BOOL;     // Geeft aan of een speler al is gekozen
+	randomCounter : INT := 0;
+	
+	Rondje_1: BOOL;
+	Rondje_2: BOOL;
+	Rondje_3: BOOL;
+	Rondje_4: BOOL;
+	Rondje_5: BOOL;
+	Rondje_6: BOOL;
+	Rondje_7: BOOL;
+	Rondje_8: BOOL;
+	Rondje_9: BOOL;
+	
+	Driehoek_1: BOOL;
+	Driehoek_2: BOOL;
+	Driehoek_3: BOOL;
+	Driehoek_4: BOOL;
+	Driehoek_5: BOOL;
+	Driehoek_6: BOOL;
+	Driehoek_7: BOOL;
+	Driehoek_8: BOOL;
+	Driehoek_9: BOOL;
+	
+	
+	Rechthoek_1: BOOL;
+	Rechthoek_2: BOOL;
+	Rechthoek_3: BOOL;
+	Rechthoek_4: BOOL;
+	Rechthoek_5: BOOL;
+	Rechthoek_6: BOOL;
+	Rechthoek_7: BOOL;
+	Rechthoek_8: BOOL;
+	Rechthoek_9: BOOL;
+	
+	
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>
