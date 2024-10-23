@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="Programma_test" Id="{986bfd2d-1d24-4789-aa62-0d912b886579}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM Programma_test
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//// Check of de Reset_Knop is ingedrukt
+//IF GVL.Reset_Knop THEN
+//    GVL.playerSelected := FALSE;        // Reset de selectie
+//    GVL.Player_1_Lamp := FALSE;         // Zet lamp van speler 1 uit
+//    GVL.Player_2_Lamp := FALSE;         // Zet lamp van speler 2 uit
+//    GVL.Player_1 := FALSE;              // Reset speler 1 status
+//    GVL.Player_2 := FALSE;              // Reset speler 2 status
+//    GVL.randomCounter := 0;             // Reset de teller
+//END_IF
+
+//// Als de Begin_Knop is ingedrukt en nog geen speler is gekozen
+//IF NOT GVL.playerSelected AND GVL.Begin_Knop THEN
+//    GVL.randomCounter := GVL.randomCounter + 5;  // Tel sneller op zolang de knop is ingedrukt (5 in plaats van 1)
+//END_IF
+
+//// Zorg ervoor dat de spelerselectie pas plaatsvindt nadat de Begin_Knop is losgelaten EN een knop is ingedrukt
+//IF GVL.randomCounter > 0 AND NOT GVL.Begin_Knop AND NOT GVL.playerSelected THEN
+//    IF (GVL.randomCounter MOD 2) = 0 THEN    // Als de teller even is
+//        GVL.Player_1 := TRUE;                // Speler 1 geselecteerd
+//        GVL.Player_1_Lamp := TRUE;           // Zet lamp voor speler 1 aan
+//        GVL.Player_2 := FALSE;               // Speler 2 niet geselecteerd
+//        GVL.Player_2_Lamp := FALSE;          // Zet lamp voor speler 2 uit
+//    ELSE                                     // Als de teller oneven is
+//        GVL.Player_1 := FALSE;               // Speler 1 niet geselecteerd
+//        GVL.Player_1_Lamp := FALSE;          // Zet lamp voor speler 1 uit
+//        GVL.Player_2 := TRUE;                // Speler 2 geselecteerd
+//        GVL.Player_2_Lamp := TRUE;           // Zet lamp voor speler 2 aan
+//    END_IF
+//    GVL.playerSelected := TRUE;              // Speler is nu geselecteerd
+//END_IF
+
+//// Als een speler is gekozen, blijven de lampen aan
+//IF GVL.playerSelected THEN
+//    IF GVL.Player_1 THEN
+//        GVL.Player_1_Lamp := TRUE;      // Zorg ervoor dat lamp speler 1 aan blijft
+//        GVL.Player_2_Lamp := FALSE;     // Zorg ervoor dat lamp speler 2 uit blijft
+//    ELSIF GVL.Player_2 THEN
+//        GVL.Player_1_Lamp := FALSE;     // Zorg ervoor dat lamp speler 1 uit blijft
+//        GVL.Player_2_Lamp := TRUE;      // Zorg ervoor dat lamp speler 2 aan blijft
+//    END_IF
+//END_IF
+
+
+//IF GVL.Rechthoek_1 THEN
+//    GVL.Rondje_1 := TRUE;
+//    GVL.Driehoek_1 := TRUE;
+//END_IF;
+
+//IF GVL.Rechthoek_2 THEN
+//    GVL.Rondje_2 := TRUE;
+//    GVL.Driehoek_2 := TRUE;
+//END_IF;
+
+//IF GVL.Rechthoek_3 THEN
+//    GVL.Rondje_3 := TRUE;
+//    GVL.Driehoek_3 := TRUE;
+//END_IF;
+
+//IF GVL.Rechthoek_4 THEN
+//    GVL.Rondje_4 := TRUE;
+//    GVL.Driehoek_4 := TRUE;
+//END_IF;
+
+//IF GVL.Rechthoek_5 THEN
+//    GVL.Rondje_5 := TRUE;
+//    GVL.Driehoek_5 := TRUE;
+//END_IF;
+
+//IF GVL.Rechthoek_6 THEN
+//    GVL.Rondje_6 := TRUE;
+//    GVL.Driehoek_6 := TRUE;
+//END_IF;
+
+//IF GVL.Rechthoek_7 THEN
+//    GVL.Rondje_7 := TRUE;
+//    GVL.Driehoek_7 := TRUE;
+//END_IF;
+
+//IF GVL.Rechthoek_8 THEN
+//    GVL.Rondje_8 := TRUE;
+//    GVL.Driehoek_8 := TRUE;
+//END_IF;
+
+//IF GVL.Rechthoek_9 THEN
+//    GVL.Rondje_9 := TRUE;
+//    GVL.Driehoek_9 := TRUE;
+//END_IF;
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="Programma_test">
+      <LineId Id="171" Count="40" />
+      <LineId Id="215" Count="1" />
+      <LineId Id="249" Count="43" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="229" Count="0" />
+      <LineId Id="228" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

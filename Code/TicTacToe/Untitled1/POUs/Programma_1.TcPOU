@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="Programma_1" Id="{f438eda7-d878-4ca8-9ca2-9b8a0fab9e03}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM Programma_1
+VAR
+	randomPlayer: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Controleer of de Begin_Knop is ingedrukt en een speler nog niet is gekozen
+IF GVL.Begin_Knop THEN
+    IF NOT GVL.playerSelected THEN
+        // Kies een willekeurige speler
+        IF GVL.randomCounter MOD 2 = 0 THEN
+            GVL.Player_1 := TRUE;  // Speler 1 is geselecteerd (Driehoek)
+            GVL.Player_2 := FALSE;
+            GVL.Player_1_Lamp := TRUE;
+            GVL.Player_2_Lamp := FALSE;
+        ELSE
+            GVL.Player_2 := TRUE;  // Speler 2 is geselecteerd (Rondje)
+            GVL.Player_1 := FALSE;
+            GVL.Player_1_Lamp := FALSE;
+            GVL.Player_2_Lamp := TRUE;
+        END_IF;
+
+        // Markeer dat een speler is gekozen
+        GVL.playerSelected := TRUE;
+    END_IF;
+
+    // Verhoog de randomCounter na een zet
+    GVL.randomCounter := GVL.randomCounter + 1;  
+END_IF;
+
+// Reset de spelers en status als de Reset_Knop is ingedrukt
+IF GVL.Reset_Knop THEN
+    GVL.playerSelected := FALSE;
+    GVL.Player_1 := FALSE;
+    GVL.Player_2 := FALSE;
+    GVL.Player_1_Lamp := FALSE;
+    GVL.Player_2_Lamp := FALSE;
+    // Reset alle rechthoeken, rondjes en driehoeken
+    GVL.Rondje_1 := FALSE; GVL.Rondje_2 := FALSE; GVL.Rondje_3 := FALSE;
+    GVL.Rondje_4 := FALSE; GVL.Rondje_5 := FALSE; GVL.Rondje_6 := FALSE;
+    GVL.Rondje_7 := FALSE; GVL.Rondje_8 := FALSE; GVL.Rondje_9 := FALSE;
+    GVL.Driehoek_1 := FALSE; GVL.Driehoek_2 := FALSE; GVL.Driehoek_3 := FALSE;
+    GVL.Driehoek_4 := FALSE; GVL.Driehoek_5 := FALSE; GVL.Driehoek_6 := FALSE;
+    GVL.Driehoek_7 := FALSE; GVL.Driehoek_8 := FALSE; GVL.Driehoek_9 := FALSE;
+    GVL.Rechthoek_1 := FALSE; GVL.Rechthoek_2 := FALSE; GVL.Rechthoek_3 := FALSE;
+    GVL.Rechthoek_4 := FALSE; GVL.Rechthoek_5 := FALSE; GVL.Rechthoek_6 := FALSE;
+    GVL.Rechthoek_7 := FALSE; GVL.Rechthoek_8 := FALSE; GVL.Rechthoek_9 := FALSE;
+END_IF;]]></ST>
+    </Implementation>
+    <LineIds Name="Programma_1">
+      <LineId Id="61" Count="40" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

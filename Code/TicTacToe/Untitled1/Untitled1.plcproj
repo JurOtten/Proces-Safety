@@ -27,7 +27,25 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\MAIN.TcPOU">
+    <Compile Include="POUs\Programma_2.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Programma_test.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Programma_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Programma_3.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Task_4.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Task_5.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Task_6.TcTTO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="VISUs\Visualization.TcVIS">
