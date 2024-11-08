@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="Programma_4" Id="{66041bb8-faf1-4f8f-adbb-746acab0497a}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM Programma_4
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//task 4: 
+// Reset alle variabelen naar de beginstatus
+IF GVL.Reset_Knop THEN
+    // Reset alle variabelen
+    GVL.Driehoek_1 := FALSE; GVL.Driehoek_2 := FALSE; GVL.Driehoek_3 := FALSE;
+    GVL.Driehoek_4 := FALSE; GVL.Driehoek_5 := FALSE; GVL.Driehoek_6 := FALSE;
+    GVL.Driehoek_7 := FALSE; GVL.Driehoek_8 := FALSE; GVL.Driehoek_9 := FALSE;
+    GVL.Rondje_1 := FALSE; GVL.Rondje_2 := FALSE; GVL.Rondje_3 := FALSE;
+    GVL.Rondje_4 := FALSE; GVL.Rondje_5 := FALSE; GVL.Rondje_6 := FALSE;
+    GVL.Rondje_7 := FALSE; GVL.Rondje_8 := FALSE; GVL.Rondje_9 := FALSE;
+
+    GVL.Player_1_Lamp := FALSE; GVL.Player_2_Lamp := FALSE;
+    GVL.Player_1 := FALSE; GVL.Player_2 := FALSE;
+    GVL.winnaar := 0; GVL.game_status := 0; GVL.turn := 0;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="Programma_4">
+      <LineId Id="23" Count="13" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

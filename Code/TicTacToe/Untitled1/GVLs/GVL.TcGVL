@@ -1,57 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <GVL Name="GVL" Id="{7ae1cc82-6396-4c22-9d9f-9bdfeaa6bf26}">
-    <Declaration><![CDATA[{attribute 'qualified_only'}
-VAR_GLOBAL
-	
-	
-	
-	Begin_Knop: BOOL;
-	Reset_Knop: BOOL; 
-	
-	Player_1: BOOL;
-	Player_1_Lamp: BOOL;
-	Player_2: BOOL;
-	Player_2_Lamp: BOOL;
-	
-	
-    playerSelected : BOOL;     // Geeft aan of een speler al is gekozen
-	randomCounter : INT := 0;
-	
-	Rondje_1: BOOL;
-	Rondje_2: BOOL;
-	Rondje_3: BOOL;
-	Rondje_4: BOOL;
-	Rondje_5: BOOL;
-	Rondje_6: BOOL;
-	Rondje_7: BOOL;
-	Rondje_8: BOOL;
-	Rondje_9: BOOL;
-	
-	Driehoek_1: BOOL;
-	Driehoek_2: BOOL;
-	Driehoek_3: BOOL;
-	Driehoek_4: BOOL;
-	Driehoek_5: BOOL;
-	Driehoek_6: BOOL;
-	Driehoek_7: BOOL;
-	Driehoek_8: BOOL;
-	Driehoek_9: BOOL;
-	
-	
-	Rechthoek_1: BOOL;
-	Rechthoek_2: BOOL;
-	Rechthoek_3: BOOL;
-	Rechthoek_4: BOOL;
-	Rechthoek_5: BOOL;
-	Rechthoek_6: BOOL;
-	Rechthoek_7: BOOL;
-	Rechthoek_8: BOOL;
-	Rechthoek_9: BOOL;
-	
-	winnaar: INT;
-	
-	
-END_VAR]]></Declaration>
+    <Declaration><![CDATA[VAR_GLOBAL
+    Begin_Knop: BOOL;           // Startknop voor het spel
+    Reset_Knop: BOOL;           // Resetknop voor het spel
+    Player_1_Lamp: BOOL;        // Lamp voor speler 1 (driehoek)
+    Player_2_Lamp: BOOL;        // Lamp voor speler 2 (rondje)
+    Player_1: BOOL;             // Is speler 1 aan de beurt?
+    Player_2: BOOL;             // Is speler 2 aan de beurt?
+
+    // Rechthoeken voor het bord (9 vakjes)
+    Rechthoek_1: BOOL;          // Vak 1
+    Rechthoek_2: BOOL;          // Vak 2
+    Rechthoek_3: BOOL;          // Vak 3
+    Rechthoek_4: BOOL;          // Vak 4
+    Rechthoek_5: BOOL;          // Vak 5
+    Rechthoek_6: BOOL;          // Vak 6
+    Rechthoek_7: BOOL;          // Vak 7
+    Rechthoek_8: BOOL;          // Vak 8
+    Rechthoek_9: BOOL;          // Vak 9
+
+    // Figuur in elk vak
+    Driehoek_1: BOOL;           // Driehoek in vak 1
+    Driehoek_2: BOOL;           // Driehoek in vak 2
+    Driehoek_3: BOOL;           // Driehoek in vak 3
+    Driehoek_4: BOOL;           // Driehoek in vak 4
+    Driehoek_5: BOOL;           // Driehoek in vak 5
+    Driehoek_6: BOOL;           // Driehoek in vak 6
+    Driehoek_7: BOOL;           // Driehoek in vak 7
+    Driehoek_8: BOOL;           // Driehoek in vak 8
+    Driehoek_9: BOOL;           // Driehoek in vak 9
+    Rondje_1: BOOL;             // Rondje in vak 1
+    Rondje_2: BOOL;             // Rondje in vak 2
+    Rondje_3: BOOL;             // Rondje in vak 3
+    Rondje_4: BOOL;             // Rondje in vak 4
+    Rondje_5: BOOL;             // Rondje in vak 5
+    Rondje_6: BOOL;             // Rondje in vak 6
+    Rondje_7: BOOL;             // Rondje in vak 7
+    Rondje_8: BOOL;             // Rondje in vak 8
+    Rondje_9: BOOL;             // Rondje in vak 9
+
+    // Winconditie en status
+    winnaar: INT;               // 0 = geen winnaar, 1 = speler 1, 2 = speler 2
+    turn: INT := 0;             // Beurt: 0 = Speler 1, 1 = Speler 2
+    game_status: INT := 0;      // Game status: 0 = gestart, 1 = bezig, 2 = gewonnen, 3 = gelijkspel
+    selectedSquare: INT := -1;  // Huidige geselecteerde vak
+    randomCounter: INT := 0;    // Voor willekeurige speler
+END_VAR
+]]></Declaration>
   </GVL>
 </TcPlcObject>

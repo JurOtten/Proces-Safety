@@ -3,129 +3,110 @@
   <POU Name="Programma_2" Id="{ccfc2342-ac26-4787-a6a4-498199d0b244}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM Programma_2
 VAR
+    currentPlayer: BOOL;  // Bepaalt welke speler aan de beurt is
 	zetGedaan: BOOL;
-	
-	spelActief: BOOL;
-	knipperTimer: INT;
-	knipperInterval: INT;
-	winnaar: INT;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Zet doen door de huidige speler
-IF spelActief THEN
+      <ST><![CDATA[// task 2: 
+// Speler zet zijn figuur
+IF GVL.game_status = 1 THEN
+    zetGedaan := FALSE; // Variabele om bij te houden of er een zet is gedaan
+
+    // Bepaal welke speler aan de beurt is
     IF GVL.Player_1 THEN
-        // Speler 1 (Driehoek) zet
-        IF GVL.Rechthoek_1 AND NOT (GVL.Rondje_1 OR GVL.Driehoek_1) THEN
-            GVL.Driehoek_1 := TRUE;
-            zetGedaan := TRUE;
-        ELSIF GVL.Rechthoek_2 AND NOT (GVL.Rondje_2 OR GVL.Driehoek_2) THEN
-            GVL.Driehoek_2 := TRUE;
-            zetGedaan := TRUE;
-        ELSIF GVL.Rechthoek_3 AND NOT (GVL.Rondje_3 OR GVL.Driehoek_3) THEN
-            GVL.Driehoek_3 := TRUE;
-            zetGedaan := TRUE;
-        ELSIF GVL.Rechthoek_4 AND NOT (GVL.Rondje_4 OR GVL.Driehoek_4) THEN
-            GVL.Driehoek_4 := TRUE;
-            zetGedaan := TRUE;
-        ELSIF GVL.Rechthoek_5 AND NOT (GVL.Rondje_5 OR GVL.Driehoek_5) THEN
-            GVL.Driehoek_5 := TRUE;
-            zetGedaan := TRUE;
-        ELSIF GVL.Rechthoek_6 AND NOT (GVL.Rondje_6 OR GVL.Driehoek_6) THEN
-            GVL.Driehoek_6 := TRUE;
-            zetGedaan := TRUE;
-        ELSIF GVL.Rechthoek_7 AND NOT (GVL.Rondje_7 OR GVL.Driehoek_7) THEN
-            GVL.Driehoek_7 := TRUE;
-            zetGedaan := TRUE;
-        ELSIF GVL.Rechthoek_8 AND NOT (GVL.Rondje_8 OR GVL.Driehoek_8) THEN
-            GVL.Driehoek_8 := TRUE;
-            zetGedaan := TRUE;
-        ELSIF GVL.Rechthoek_9 AND NOT (GVL.Rondje_9 OR GVL.Driehoek_9) THEN
-            GVL.Driehoek_9 := TRUE;
-            zetGedaan := TRUE;
-        END_IF;
+        currentPlayer := TRUE;   // Speler 1 is actief
+    ELSE
+        currentPlayer := FALSE;  // Speler 2 is actief
+    END_IF
 
-    ELSIF GVL.Player_2 THEN
-        // Speler 2 (Rondje) zet
-        IF GVL.Rechthoek_1 AND NOT (GVL.Rondje_1 OR GVL.Driehoek_1) THEN
-            GVL.Rondje_1 := TRUE;
-            zetGedaan := TRUE;
-        ELSIF GVL.Rechthoek_2 AND NOT (GVL.Rondje_2 OR GVL.Driehoek_2) THEN
-            GVL.Rondje_2 := TRUE;
-            zetGedaan := TRUE;
-        ELSIF GVL.Rechthoek_3 AND NOT (GVL.Rondje_3 OR GVL.Driehoek_3) THEN
-            GVL.Rondje_3 := TRUE;
-            zetGedaan := TRUE;
-        ELSIF GVL.Rechthoek_4 AND NOT (GVL.Rondje_4 OR GVL.Driehoek_4) THEN
-            GVL.Rondje_4 := TRUE;
-            zetGedaan := TRUE;
-        ELSIF GVL.Rechthoek_5 AND NOT (GVL.Rondje_5 OR GVL.Driehoek_5) THEN
-            GVL.Rondje_5 := TRUE;
-            zetGedaan := TRUE;
-        ELSIF GVL.Rechthoek_6 AND NOT (GVL.Rondje_6 OR GVL.Driehoek_6) THEN
-            GVL.Rondje_6 := TRUE;
-            zetGedaan := TRUE;
-        ELSIF GVL.Rechthoek_7 AND NOT (GVL.Rondje_7 OR GVL.Driehoek_7) THEN
-            GVL.Rondje_7 := TRUE;
-            zetGedaan := TRUE;
-        ELSIF GVL.Rechthoek_8 AND NOT (GVL.Rondje_8 OR GVL.Driehoek_8) THEN
-            GVL.Rondje_8 := TRUE;
-            zetGedaan := TRUE;
-        ELSIF GVL.Rechthoek_9 AND NOT (GVL.Rondje_9 OR GVL.Driehoek_9) THEN
-            GVL.Rondje_9 := TRUE;
-            zetGedaan := TRUE;
-        END_IF;
-    END_IF;
+    // Controleer of een rechthoek is geselecteerd en of deze leeg is
+    // Als de rechthoek leeg is, vul het met het figuur van de speler
+    IF GVL.Rechthoek_1 AND NOT (GVL.Driehoek_1 OR GVL.Rondje_1) THEN
+        IF currentPlayer THEN
+            GVL.Driehoek_1 := TRUE;  // Zet driehoek van speler 1
+        ELSE
+            GVL.Rondje_1 := TRUE;    // Zet rondje van speler 2
+        END_IF
+        zetGedaan := TRUE;
+    ELSIF GVL.Rechthoek_2 AND NOT (GVL.Driehoek_2 OR GVL.Rondje_2) THEN
+        IF currentPlayer THEN
+            GVL.Driehoek_2 := TRUE;  // Zet driehoek van speler 1
+        ELSE
+            GVL.Rondje_2 := TRUE;    // Zet rondje van speler 2
+        END_IF
+        zetGedaan := TRUE;
+    ELSIF GVL.Rechthoek_3 AND NOT (GVL.Driehoek_3 OR GVL.Rondje_3) THEN
+        IF currentPlayer THEN
+            GVL.Driehoek_3 := TRUE;  // Zet driehoek van speler 1
+        ELSE
+            GVL.Rondje_3 := TRUE;    // Zet rondje van speler 2
+        END_IF
+        zetGedaan := TRUE;
+    ELSIF GVL.Rechthoek_4 AND NOT (GVL.Driehoek_4 OR GVL.Rondje_4) THEN
+        IF currentPlayer THEN
+            GVL.Driehoek_4 := TRUE;  // Zet driehoek van speler 1
+        ELSE
+            GVL.Rondje_4 := TRUE;    // Zet rondje van speler 2
+        END_IF
+        zetGedaan := TRUE;
+    ELSIF GVL.Rechthoek_5 AND NOT (GVL.Driehoek_5 OR GVL.Rondje_5) THEN
+        IF currentPlayer THEN
+            GVL.Driehoek_5 := TRUE;  // Zet driehoek van speler 1
+        ELSE
+            GVL.Rondje_5 := TRUE;    // Zet rondje van speler 2
+        END_IF
+        zetGedaan := TRUE;
+    ELSIF GVL.Rechthoek_6 AND NOT (GVL.Driehoek_6 OR GVL.Rondje_6) THEN
+        IF currentPlayer THEN
+            GVL.Driehoek_6 := TRUE;  // Zet driehoek van speler 1
+        ELSE
+            GVL.Rondje_6 := TRUE;    // Zet rondje van speler 2
+        END_IF
+        zetGedaan := TRUE;
+    ELSIF GVL.Rechthoek_7 AND NOT (GVL.Driehoek_7 OR GVL.Rondje_7) THEN
+        IF currentPlayer THEN
+            GVL.Driehoek_7 := TRUE;  // Zet driehoek van speler 1
+        ELSE
+            GVL.Rondje_7 := TRUE;    // Zet rondje van speler 2
+        END_IF
+        zetGedaan := TRUE;
+    ELSIF GVL.Rechthoek_8 AND NOT (GVL.Driehoek_8 OR GVL.Rondje_8) THEN
+        IF currentPlayer THEN
+            GVL.Driehoek_8 := TRUE;  // Zet driehoek van speler 1
+        ELSE
+            GVL.Rondje_8 := TRUE;    // Zet rondje van speler 2
+        END_IF
+        zetGedaan := TRUE;
+    ELSIF GVL.Rechthoek_9 AND NOT (GVL.Driehoek_9 OR GVL.Rondje_9) THEN
+        IF currentPlayer THEN
+            GVL.Driehoek_9 := TRUE;  // Zet driehoek van speler 1
+        ELSE
+            GVL.Rondje_9 := TRUE;    // Zet rondje van speler 2
+        END_IF
+        zetGedaan := TRUE;
+    END_IF
 
-    // Na het zetten, controleer of er een winnaar is
+    // Wissel de beurt alleen als er een zet is gedaan
     IF zetGedaan THEN
-        // Controleer of speler 1 heeft gewonnen
-        IF (GVL.Driehoek_1 AND GVL.Driehoek_2 AND GVL.Driehoek_3) OR  // Horizontaal
-           (GVL.Driehoek_4 AND GVL.Driehoek_5 AND GVL.Driehoek_6) OR
-           (GVL.Driehoek_7 AND GVL.Driehoek_8 AND GVL.Driehoek_9) OR
-           (GVL.Driehoek_1 AND GVL.Driehoek_4 AND GVL.Driehoek_7) OR  // Verticaal
-           (GVL.Driehoek_2 AND GVL.Driehoek_5 AND GVL.Driehoek_8) OR
-           (GVL.Driehoek_3 AND GVL.Driehoek_6 AND GVL.Driehoek_9) OR
-           (GVL.Driehoek_1 AND GVL.Driehoek_5 AND GVL.Driehoek_9) OR  // Diagonaal
-           (GVL.Driehoek_3 AND GVL.Driehoek_5 AND GVL.Driehoek_7) THEN
-            winnaar := 1;  // Speler 1 wint
-            spelActief := FALSE;  // Stop het spel
-            GVL.Player_1_Lamp := TRUE;  // Zet de lamp van speler 1 aan
-            GVL.Player_2_Lamp := FALSE; // Zet de lamp van speler 2 uit
-        ELSIF (GVL.Rondje_1 AND GVL.Rondje_2 AND GVL.Rondje_3) OR  // Horizontaal
-               (GVL.Rondje_4 AND GVL.Rondje_5 AND GVL.Rondje_6) OR
-               (GVL.Rondje_7 AND GVL.Rondje_8 AND GVL.Rondje_9) OR
-               (GVL.Rondje_1 AND GVL.Rondje_4 AND GVL.Rondje_7) OR  // Verticaal
-               (GVL.Rondje_2 AND GVL.Rondje_5 AND GVL.Rondje_8) OR
-               (GVL.Rondje_3 AND GVL.Rondje_6 AND GVL.Rondje_9) OR
-               (GVL.Rondje_1 AND GVL.Rondje_5 AND GVL.Rondje_9) OR  // Diagonaal
-               (GVL.Rondje_3 AND GVL.Rondje_5 AND GVL.Rondje_7) THEN
-            winnaar := 2;  // Speler 2 wint
-            spelActief := FALSE;  // Stop het spel
-            GVL.Player_2_Lamp := TRUE;  // Zet de lamp van speler 2 aan
-            GVL.Player_1_Lamp := FALSE; // Zet de lamp van speler 1 uit
-        END_IF;
+        IF GVL.Player_1 THEN
+            GVL.Player_1 := FALSE;   // Zet speler 1 uit
+            GVL.Player_2 := TRUE;    // Zet speler 2 aan
+            GVL.Player_1_Lamp := FALSE;  // Zet lamp van speler 1 uit
+            GVL.Player_2_Lamp := TRUE;   // Zet lamp van speler 2 aan
+        ELSE
+            GVL.Player_1 := TRUE;    // Zet speler 1 aan
+            GVL.Player_2 := FALSE;   // Zet speler 2 uit
+            GVL.Player_1_Lamp := TRUE;  // Zet lamp van speler 1 aan
+            GVL.Player_2_Lamp := FALSE;  // Zet lamp van speler 2 uit
+        END_IF
 
-        // Start de knipperfunctie als er een winnaar is
-        IF winnaar > 0 THEN
-            knipperTimer := knipperTimer + 1; // Tel de tijd op
-            IF knipperTimer >= knipperInterval THEN
-                knipperTimer := 0;
-                IF winnaar = 1 THEN
-                    GVL.Player_1_Lamp := NOT GVL.Player_1_Lamp; // Knipper de lamp van speler 1
-                ELSIF winnaar = 2 THEN
-                    GVL.Player_2_Lamp := NOT GVL.Player_2_Lamp; // Knipper de lamp van speler 2
-                END_IF;
-            END_IF;
-        END_IF;
-
-        zetGedaan := FALSE; // Reset zet status na verwerking
-    END_IF;
-END_IF;
-]]></ST>
+        // Zet de status van het spel naar 2 (wincheck fase) als er een zet is gedaan
+        GVL.game_status := 2;  // Ga naar de wincheck fase
+    END_IF
+END_IF]]></ST>
     </Implementation>
     <LineIds Name="Programma_2">
-      <LineId Id="399" Count="109" />
+      <LineId Id="1286" Count="95" />
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
