@@ -1,6 +1,6 @@
 # 1.Introductie
 
-Tijdens het vak Proces en Safety heb ik de opdracht gekregen om een programma te ontwikkelen met minimaal twee taken die met elkaar communiceren. Dit programma is geprogrammeerd in TwinCAT, een ontwikkelomgeving voor PLC-toepassingen.
+Tijdens het vak Proces en Safety heb ik de opdracht gekregen om een programma te ontwikkelen met minimaal twee taken die met elkaar communiceren. Dit programma is geprogrammeerd in VS maar dan met een TwinCAT plugin, een ontwikkelomgeving voor PLC-toepassingen.
 
 De opdracht omvatte de volgende vereisten:
 
