@@ -7,6 +7,3 @@ title = "Proces & Safety"
 
 [preprocessor.plantuml]
 plantuml-cmd="http://localhost:8181"
-
-[build]
-static = "mijn_static_map"  # Verander de naam van de static map als je dat wilt

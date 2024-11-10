@@ -20,6 +20,3 @@ Ik heb ervoor gekozen om een TicTacToe-spel te ontwikkelen, omdat ik het een leu
 # Programma Tictactoe
  Hier is een downloadlink voor het downloaden van alleen het programma.
 [Download de Code op GitHub](https://github.com/JurOtten/Proces-Safety/tree/master/Code)
-
-![Visualisatie afbeelding](../static/VISU.png)
-![Afbeelding van een externe URL](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vecteezy.com%2Ffree-vector%2Fbullet-points&psig=AOvVaw22XW5AuVp-OKmnqUXlmxL4&ust=1731352989618000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPjGmtO-0okDFQAAAAAdAAAAABAE)
