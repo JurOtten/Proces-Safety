@@ -6,8 +6,12 @@
     Reset_Knop: BOOL;           // Resetknop voor het spel
     Player_1_Lamp: BOOL;        // Lamp voor speler 1 (driehoek)
     Player_2_Lamp: BOOL;        // Lamp voor speler 2 (rondje)
+	Player_1_Lamp_G: BOOL;        // Lamp voor speler 1 (driehoek)
+    Player_2_Lamp_G: BOOL;        // Lamp voor speler 2 (rondje)
     Player_1: BOOL;             // Is speler 1 aan de beurt?
     Player_2: BOOL;             // Is speler 2 aan de beurt?
+	Gelijkspel: Bool;
+	
 
     // Rechthoeken voor het bord (9 vakjes)
     Rechthoek_1: BOOL;          // Vak 1

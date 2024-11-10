@@ -19,11 +19,14 @@ IF GVL.Reset_Knop THEN
 
     GVL.Player_1_Lamp := FALSE; GVL.Player_2_Lamp := FALSE;
     GVL.Player_1 := FALSE; GVL.Player_2 := FALSE;
+	GVL.Player_1_Lamp_G := FALSE; GVL.Player_2_Lamp_G := FALSE; GVL.Gelijkspel := FALSE;
     GVL.winnaar := 0; GVL.game_status := 0; GVL.turn := 0;
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="Programma_4">
-      <LineId Id="23" Count="13" />
+      <LineId Id="23" Count="12" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="36" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>

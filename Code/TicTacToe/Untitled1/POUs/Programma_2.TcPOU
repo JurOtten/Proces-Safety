@@ -7,8 +7,7 @@ VAR
 	zetGedaan: BOOL;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// task 2: 
-// Speler zet zijn figuur
+      <ST><![CDATA[// Task 2: Speler zet zijn figuur
 IF GVL.game_status = 1 THEN
     zetGedaan := FALSE; // Variabele om bij te houden of er een zet is gedaan
 
@@ -86,8 +85,8 @@ IF GVL.game_status = 1 THEN
         zetGedaan := TRUE;
     END_IF
 
-    // Wissel de beurt alleen als er een zet is gedaan
-    IF zetGedaan THEN
+    // Wissel de beurt alleen als er een zet is gedaan en geen winnaar is
+    IF zetGedaan AND GVL.winnaar = 0 THEN
         IF GVL.Player_1 THEN
             GVL.Player_1 := FALSE;   // Zet speler 1 uit
             GVL.Player_2 := TRUE;    // Zet speler 2 aan
@@ -106,7 +105,7 @@ IF GVL.game_status = 1 THEN
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="Programma_2">
-      <LineId Id="1286" Count="95" />
+      <LineId Id="1386" Count="94" />
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>

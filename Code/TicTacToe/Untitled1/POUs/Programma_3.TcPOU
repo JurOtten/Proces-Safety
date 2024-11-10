@@ -4,12 +4,15 @@
     <Declaration><![CDATA[PROGRAM Programma_3
 VAR
     winCondition: BOOL;
+	Timer: TON;
+	Winner_Timer: TON;
+	IN: INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// task 3: 
+      <ST><![CDATA[// Task 3: Controleer of er een winnaar of gelijkspel is
 IF GVL.game_status = 2 THEN  // Wincheck fase
-    // Controleer of er een winnaar is
+    // Controleer of Speler 1 heeft gewonnen
     IF (GVL.Driehoek_1 AND GVL.Driehoek_2 AND GVL.Driehoek_3) OR
        (GVL.Driehoek_4 AND GVL.Driehoek_5 AND GVL.Driehoek_6) OR
        (GVL.Driehoek_7 AND GVL.Driehoek_8 AND GVL.Driehoek_9) OR
@@ -18,11 +21,15 @@ IF GVL.game_status = 2 THEN  // Wincheck fase
        (GVL.Driehoek_3 AND GVL.Driehoek_6 AND GVL.Driehoek_9) OR
        (GVL.Driehoek_1 AND GVL.Driehoek_5 AND GVL.Driehoek_9) OR
        (GVL.Driehoek_3 AND GVL.Driehoek_5 AND GVL.Driehoek_7) THEN
+       
         // Speler 1 heeft gewonnen
         GVL.winnaar := 1;
-        GVL.Player_1_Lamp := TRUE;
-        GVL.game_status := 3;  // Zet status naar "gewonnen"
-        
+        GVL.game_status := 3;  // Zet game status op 3 voor winnende toestand
+        GVL.Player_1_Lamp_G := TRUE;  // Winnende lamp Speler 1 aan
+        GVL.Player_1_Lamp := FALSE;  // Zet de lamp van Speler 1 uit
+        GVL.Player_2_Lamp := FALSE;  // Zet de lamp van Speler 2 uit
+
+    // Controleer of Speler 2 heeft gewonnen
     ELSIF (GVL.Rondje_1 AND GVL.Rondje_2 AND GVL.Rondje_3) OR
            (GVL.Rondje_4 AND GVL.Rondje_5 AND GVL.Rondje_6) OR
            (GVL.Rondje_7 AND GVL.Rondje_8 AND GVL.Rondje_9) OR
@@ -31,11 +38,14 @@ IF GVL.game_status = 2 THEN  // Wincheck fase
            (GVL.Rondje_3 AND GVL.Rondje_6 AND GVL.Rondje_9) OR
            (GVL.Rondje_1 AND GVL.Rondje_5 AND GVL.Rondje_9) OR
            (GVL.Rondje_3 AND GVL.Rondje_5 AND GVL.Rondje_7) THEN
+
         // Speler 2 heeft gewonnen
         GVL.winnaar := 2;
-        GVL.Player_2_Lamp := TRUE;
-        GVL.game_status := 3;  // Zet status naar "gewonnen"
-        
+        GVL.game_status := 3;  // Zet game status op 3 voor winnende toestand
+        GVL.Player_2_Lamp_G := TRUE;  // Winnende lamp Speler 2 aan
+        GVL.Player_1_Lamp := FALSE;  // Zet de lamp van Speler 1 uit
+        GVL.Player_2_Lamp := FALSE;  // Zet de lamp van Speler 2 uit
+
     ELSE
         // Als er geen winnaar is, controleer dan of het gelijkspel is
         IF (GVL.Driehoek_1 OR GVL.Rondje_1) AND
@@ -48,16 +58,23 @@ IF GVL.game_status = 2 THEN  // Wincheck fase
            (GVL.Driehoek_8 OR GVL.Rondje_8) AND
            (GVL.Driehoek_9 OR GVL.Rondje_9) THEN
             // Het is gelijkspel
-            GVL.game_status := 4;  // Zet status naar gelijkspel
+            GVL.Gelijkspel := TRUE;  // Zet status naar gelijkspel
+		    GVL.Player_1_Lamp := FALSE;  // Zet de lamp van Speler 1 uit na wachttijd
+			GVL.Player_2_Lamp := FALSE;
         ELSE
             // Er zijn nog lege vakken, geen gelijkspel
             GVL.game_status := 1;  // Ga terug naar de beurtfase
         END_IF
     END_IF
-END_IF]]></ST>
+END_IF
+]]></ST>
     </Implementation>
     <LineIds Name="Programma_3">
-      <LineId Id="709" Count="46" />
+      <LineId Id="1002" Count="33" />
+      <LineId Id="973" Count="14" />
+      <LineId Id="991" Count="0" />
+      <LineId Id="993" Count="0" />
+      <LineId Id="996" Count="5" />
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
