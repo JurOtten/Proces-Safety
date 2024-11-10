@@ -105,7 +105,7 @@ IF GVL.game_status = 1 THEN
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="Programma_2">
-      <LineId Id="1386" Count="94" />
+      <LineId Id="1485" Count="94" />
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
