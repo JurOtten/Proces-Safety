@@ -6,44 +6,50 @@
 actor Speler
 entity GVL
 
-Speler -> GVL : Start het spel (Begin_Knop)
+Speler -> GVL : Start spel (Begin_Knop)
+GVL -> GVL : Spelerstatus = "spelend"
+GVL -> GVL : Spelstatus = "beurt spelen"
 GVL -> GVL : Verhoog randomCounter
-GVL -> GVL : Genereer pseudo-willekeurig getal (tempRand)
-GVL -> GVL : Bepaal speler 1 of 2
-GVL -> GVL : Zet Player_1_Lamp / Player_2_Lamp
-GVL -> GVL : Zet game_status naar 1
+GVL -> GVL : Genereer pseudo-willekeurig getal
+GVL -> GVL : Bepaal actieve speler
+GVL -> GVL : Zet Player_1_Lamp / Player_2_Lamp aan
 
 Speler -> GVL : Zet figuur (Rechthoek_X)
-GVL -> GVL : Controleer speler (Player_1/Player_2)
+GVL -> GVL : Controleer actieve speler
 GVL -> GVL : Plaats figuur (Driehoek/Rondje)
 GVL -> GVL : Zet zetGedaan = TRUE
-GVL -> GVL : Verander beurt (Player_1/Player_2)
-GVL -> GVL : Zet game_status naar 2
+GVL -> GVL : Wissel actieve speler
+GVL -> GVL : Spelstatus = "controlefase"
 
-GVL -> GVL : Controleer winnaar (Driehoek/Rondje lijnen)
+GVL -> GVL : Controleer winnaar
 alt Speler 1 wint
+    GVL -> GVL : Spelerstatus = "gewonnen" (Speler 1)
     GVL -> GVL : Zet winnaar = 1
     GVL -> GVL : Zet Player_1_Lamp_G aan
-    GVL -> GVL : Zet Player_2_Lamp uit
-    GVL -> GVL : Zet game_status naar 3
+    GVL -> GVL : Zet spelstatus = "eindfase"
 else Speler 2 wint
+    GVL -> GVL : Spelerstatus = "gewonnen" (Speler 2)
     GVL -> GVL : Zet winnaar = 2
     GVL -> GVL : Zet Player_2_Lamp_G aan
-    GVL -> GVL : Zet Player_1_Lamp uit
-    GVL -> GVL : Zet game_status naar 3
-else Geen winnaar, check gelijkspel
+    GVL -> GVL : Zet spelstatus = "eindfase"
+else Geen winnaar, controleer gelijkspel
     GVL -> GVL : Controleer gelijkspel
     alt Gelijkspel
-        GVL -> GVL : Zet Gelijkspel = TRUE
+        GVL -> GVL : Spelerstatus = "gelijkspel"
         GVL -> GVL : Zet Player_1_Lamp en Player_2_Lamp uit
+        GVL -> GVL : Zet spelstatus = "eindfase"
+    else Geen gelijkspel
+        GVL -> GVL : Spelstatus = "beurt spelen" (Volgende ronde)
     end
-    GVL -> GVL : Zet game_status naar 1 (terug naar beurtfase)
 end
 
-Speler -> GVL : Reset het spel (Reset_Knop)
-GVL -> GVL : Reset alle variabelen naar beginstatus
+Speler -> GVL : Reset spel (Reset_Knop)
+GVL -> GVL : Reset spelerstatus = "inactief"
+GVL -> GVL : Reset spelstatus = "niet gestart"
+GVL -> GVL : Reset variabelen
 
 @enduml
+
 
 ```
 Uitleg:
