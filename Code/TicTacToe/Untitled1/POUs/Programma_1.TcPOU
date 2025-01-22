@@ -9,7 +9,12 @@ END_VAR
     <Implementation>
       <ST><![CDATA[// task 1: 
 // Start het spel
-IF GVL.game_status = 0 THEN
+// GVL.game_status: 0 + GVL.Begin_Knop = startspel
+// GVL.game_status: 1 = spel bezig
+// GVL.game_status: 2 = controleren of er een winnaar is anders weer naar 1 toe.
+// GVL.game_status: 3 = einde spel, winnaar of gelijkspel
+
+IF GVL.game_status = 0 THEN //start knop in drukken
     IF GVL.Begin_Knop THEN
         // Verhoog de randomCounter voor een willekeurige keuze
         GVL.randomCounter := GVL.randomCounter + 1;
@@ -33,7 +38,11 @@ IF GVL.game_status = 0 THEN
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="Programma_1">
-      <LineId Id="226" Count="22" />
+      <LineId Id="226" Count="1" />
+      <LineId Id="253" Count="0" />
+      <LineId Id="255" Count="2" />
+      <LineId Id="254" Count="0" />
+      <LineId Id="228" Count="20" />
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
