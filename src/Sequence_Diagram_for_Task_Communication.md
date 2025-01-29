@@ -3,55 +3,41 @@
 ```plantuml
 
 @startuml
-actor Speler
-entity GVL
 
-Speler -> GVL : Start spel (Begin_Knop)
-GVL -> GVL : Spelerstatus = "spelend"
-GVL -> GVL : Spelstatus = "beurt spelen"
-GVL -> GVL : Verhoog randomCounter
-GVL -> GVL : Genereer pseudo-willekeurig getal
-GVL -> GVL : Bepaal actieve speler
-GVL -> GVL : Zet Player_1_Lamp / Player_2_Lamp aan
+skinparam backgroundcolor transparent
+skinparam arrowcolor lightblue
 
-Speler -> GVL : Zet figuur (Rechthoek_X)
-GVL -> GVL : Controleer actieve speler
-GVL -> GVL : Plaats figuur (Driehoek/Rondje)
-GVL -> GVL : Zet zetGedaan = TRUE
-GVL -> GVL : Wissel actieve speler
-GVL -> GVL : Spelstatus = "controlefase"
+participant "Game Logic" as GVL
+participant "Global Variables" as GVL_VARS
 
-GVL -> GVL : Controleer winnaar
-alt Speler 1 wint
-    GVL -> GVL : Spelerstatus = "gewonnen" (Speler 1)
-    GVL -> GVL : Zet winnaar = 1
-    GVL -> GVL : Zet Player_1_Lamp_G aan
-    GVL -> GVL : Zet spelstatus = "eindfase"
-else Speler 2 wint
-    GVL -> GVL : Spelerstatus = "gewonnen" (Speler 2)
-    GVL -> GVL : Zet winnaar = 2
-    GVL -> GVL : Zet Player_2_Lamp_G aan
-    GVL -> GVL : Zet spelstatus = "eindfase"
-else Geen winnaar, controleer gelijkspel
-    GVL -> GVL : Controleer gelijkspel
-    alt Gelijkspel
-        GVL -> GVL : Spelerstatus = "gelijkspel"
-        GVL -> GVL : Zet Player_1_Lamp en Player_2_Lamp uit
-        GVL -> GVL : Zet spelstatus = "eindfase"
-    else Geen gelijkspel
-        GVL -> GVL : Spelstatus = "beurt spelen" (Volgende ronde)
+GVL -> GVL_VARS: Controleer game_status (0)
+GVL -> GVL_VARS: Genereer willekeurige speler
+GVL -> GVL_VARS: Zet GVL.Player_1 of GVL.Player_2
+GVL -> GVL_VARS: Zet game_status naar 1 (spel bezig)
+
+loop Zetten plaatsen
+    GVL -> GVL_VARS: Controleer of vak leeg is
+    alt Vak is leeg
+        GVL -> GVL_VARS: Plaats symbool
+        GVL -> GVL_VARS: Wissel speler (GVL.Player_1 <-> GVL.Player_2)
+        GVL -> GVL_VARS: Zet game_status naar 2 (wincheck)
     end
 end
 
-Speler -> GVL : Reset spel (Reset_Knop)
-GVL -> GVL : Reset spelerstatus = "inactief"
-GVL -> GVL : Reset spelstatus = "niet gestart"
-GVL -> GVL : Reset variabelen
+alt Winnaar bepaald
+    GVL -> GVL_VARS: Zet game_status naar 3 (einde spel)
+else Gelijkspel
+    GVL -> GVL_VARS: Zet game_status naar 3 (einde spel)
+else Spel gaat verder
+    GVL -> GVL_VARS: Zet game_status terug naar 1
+end
 
+GVL -> GVL_VARS: Reset alle variabelen
+GVL -> GVL_VARS: Spel is gereset
 @enduml
 
 
 ```
 Uitleg:
 
-- Het sequentie diagram toont de communicatie tussen de speler (Speler), de spelvariabelen (GVL), en de functies die de kernlogica van het spel verwerken. De flow omvat het starten van het spel, het plaatsen van zetten, het controleren van winnaars en het resetten van het spel.
+- Het sequentie diagram toont de communicatie.

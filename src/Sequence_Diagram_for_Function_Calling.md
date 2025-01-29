@@ -2,39 +2,34 @@
 
 ```plantuml
 @startuml
-entity GVL
-entity Functies
 
-GVL -> Functies : StartSpel()
-Functies -> GVL : Stel actieve speler in
-Functies -> GVL : Zet lampjes aan
-GVL -> GVL : Zet game_status naar 1
+skinparam backgroundcolor transparent
 
-GVL -> Functies : ZetFiguur(Rechthoek_X)
-Functies -> GVL : Plaats figuur in vak
-GVL -> Functies : WisselBeurt()
-Functies -> GVL : Wissel actieve speler en lampjes
-GVL -> GVL : Zet game_status naar 2
+participant Task3 as "Controleer Winnaar"
+participant Function as "ControleerWinnaar()"
+participant GVL
 
-GVL -> Functies : ControleerWinnaar()
-Functies -> GVL : Controleer winnende combinatie
+Task3 -> GVL : Lees spelbordstatus
+Task3 -> Function : Call ControleerWinnaar()
+
+Function -> Task3 : Output winnaarstatus
+
 alt Winnaar gevonden
-    Functies -> GVL : Stel winnaar in
-    Functies -> GVL : Zet winnende lamp aan
-    GV -> GVL : Zet game_status naar 3
+    Task3 -> GVL : Zet GVL.winnaar = 1 of 2
+    Task3 -> GVL : Zet GVL.game_status = 3
+    Task3 -> GVL : Zet winnaar lamp aan
 else Geen winnaar
-    Functies -> GVL : Controleer gelijkspel
+    Task3 -> GVL : Controleer gelijkspel
     alt Gelijkspel
-        Functies -> GVL : Stel gelijkspel in
-    else Nog vrije vakken
-        Functies -> GVL : Ga door naar volgende beurt
+        Task3 -> GVL : Zet GVL.Gelijkspel = TRUE
+        Task3 -> GVL : Zet GVL.game_status = 3
+    else Nog zetten mogelijk
+        Task3 -> GVL : Zet GVL.game_status = 1 (Beurt wisselen)
     end
 end
 
-GVL -> Functies : ResetSpel()
-Functies -> GVL : Reset alle variabelen
-
 @enduml
+
 
 
 
@@ -42,6 +37,6 @@ Functies -> GVL : Reset alle variabelen
 
 Uitleg:
 
-- Dit diagram toont de interacties tussen de speler, de spelvariabelen en de functies die de logica van het spel beheren. Het laat zien hoe functies worden aangeroepen om de status van het spel bij te houden en de spelbeurten te beheren.
+- Dit diagram toont de functie winnaar aan.
 
 
